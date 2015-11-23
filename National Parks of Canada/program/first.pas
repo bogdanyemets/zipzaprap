@@ -1,0 +1,43 @@
+unit first;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, jpeg, ExtCtrls;
+
+type
+  TfrmFirst = class(TForm)
+    Image1: TImage;
+    procedure Image1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmFirst: TfrmFirst;
+
+implementation
+
+uses menu;
+
+{$R *.dfm}
+
+procedure TfrmFirst.FormCreate(Sender: TObject);
+begin
+image1.Top:=0;
+image1.Left:=0;
+frmFirst.Width:=image1.Width;
+frmFirst.Height:=image1.Height;
+end;
+
+procedure TfrmFirst.Image1Click(Sender: TObject);
+begin
+frmFirst.Hide;
+frmMenu.Show;
+end;
+
+end.

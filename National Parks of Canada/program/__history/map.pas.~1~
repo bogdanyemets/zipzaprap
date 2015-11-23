@@ -1,0 +1,1095 @@
+unit map;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ExtCtrls, jpeg, OleCtrls, SHDocVw, pngimage;
+
+type
+  TfrmMap = class(TForm)
+    Image: TImage;
+    plus: TButton;
+    minus: TButton;
+    Timer1: TTimer;
+    Timer2: TTimer;
+    Button4: TButton;
+    Label1: TLabel;
+    Timer3: TTimer;
+    savei: TButton;
+    loade: TButton;
+    ScrollBox2: TScrollBox;
+    Timer4: TTimer;
+    Image2: TImage;
+    Image1: TImage;
+    Image3: TImage;
+    Image4: TImage;
+    Image5: TImage;
+    Image6: TImage;
+    Image7: TImage;
+    Image8: TImage;
+    Image9: TImage;
+    Image10: TImage;
+    Image11: TImage;
+    Image12: TImage;
+    Image13: TImage;
+    Image14: TImage;
+    Image15: TImage;
+    Image16: TImage;
+    Image17: TImage;
+    Image18: TImage;
+    Image19: TImage;
+    Image20: TImage;
+    Image21: TImage;
+    Image22: TImage;
+    Image23: TImage;
+    Image24: TImage;
+    Image25: TImage;
+    Image26: TImage;
+    Image27: TImage;
+    ScrollBox1: TScrollBox;
+    WebBrowser1: TWebBrowser;
+    Image28: TImage;
+    Image29: TImage;
+    Image30: TImage;
+    Image31: TImage;
+    Image32: TImage;
+    Image33: TImage;
+    Image34: TImage;
+    Image35: TImage;
+    Image36: TImage;
+    Image37: TImage;
+    Image38: TImage;
+    Image39: TImage;
+    Image40: TImage;
+    Image41: TImage;
+    Image42: TImage;
+    Image43: TImage;
+    fon1: TImage;
+    Imagel: TImage;
+    procedure resizeimage(dkt:integer);
+    procedure Timer1Timer(Sender: TObject);
+    procedure plusMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure plusMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure Timer2Timer(Sender: TObject);
+    procedure minusMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure minusMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure Button4Click(Sender: TObject);
+    procedure ImageMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure ImageMouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure ImageMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure FormCreate(Sender: TObject);
+    procedure saveiClick(Sender: TObject);
+    procedure loadeClick(Sender: TObject);
+    procedure Timer3Timer(Sender: TObject);
+    procedure Image2MouseEnter(Sender: TObject);
+    procedure Image2MouseLeave(Sender: TObject);
+    procedure Timer4Timer(Sender: TObject);
+    procedure FormResize(Sender: TObject);
+    procedure ImagelMouseEnter(Sender: TObject);
+    procedure ImagelMouseLeave(Sender: TObject);
+    procedure ImagelClick(Sender: TObject);
+    procedure Image1Click(Sender: TObject);
+    procedure Image4Click(Sender: TObject);
+    procedure Image3Click(Sender: TObject);
+    procedure Image5Click(Sender: TObject);
+    procedure Image6Click(Sender: TObject);
+    procedure Image8Click(Sender: TObject);
+    procedure Image9Click(Sender: TObject);
+    procedure Image10Click(Sender: TObject);
+    procedure Image11Click(Sender: TObject);
+    procedure Image12Click(Sender: TObject);
+    procedure Image13Click(Sender: TObject);
+    procedure Image14Click(Sender: TObject);
+    procedure Image15Click(Sender: TObject);
+    procedure Image16Click(Sender: TObject);
+    procedure Image17Click(Sender: TObject);
+    procedure Image18Click(Sender: TObject);
+    procedure Image19Click(Sender: TObject);
+    procedure Image20Click(Sender: TObject);
+    procedure Image21Click(Sender: TObject);
+    procedure Image22Click(Sender: TObject);
+    procedure Image23Click(Sender: TObject);
+    procedure Image24Click(Sender: TObject);
+    procedure Image25Click(Sender: TObject);
+    procedure Image26Click(Sender: TObject);
+    procedure Image27Click(Sender: TObject);
+    procedure Image28Click(Sender: TObject);
+    procedure Image29Click(Sender: TObject);
+    procedure Image30Click(Sender: TObject);
+    procedure Image31Click(Sender: TObject);
+    procedure Image32Click(Sender: TObject);
+    procedure Image33Click(Sender: TObject);
+    procedure Image34Click(Sender: TObject);
+    procedure Image35Click(Sender: TObject);
+    procedure Image36Click(Sender: TObject);
+    procedure Image37Click(Sender: TObject);
+    procedure Image38Click(Sender: TObject);
+    procedure Image39Click(Sender: TObject);
+    procedure Image40Click(Sender: TObject);
+    procedure Image41Click(Sender: TObject);
+    procedure Image42Click(Sender: TObject);
+    procedure Image43Click(Sender: TObject);
+    procedure Image2Click(Sender: TObject);
+    procedure Image7Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+  Const Npark=43;
+
+var
+  frmMap: TfrmMap;
+   rt:boolean;
+   xo,yo:double;
+   xi,yi:double;
+
+
+   xob,yob:array[1..Npark] of double;
+   xb,yb:array[1..Npark] of double;
+   xtb,ytb:array[1..Npark] of double;
+   xt,yt:array[1..Npark] of double;
+
+   knw_h:array[1..Npark] of tpoint;
+   knt_l:array[1..Npark] of tpoint;
+
+   mx,my:integer;
+
+   dktf:integer;
+implementation
+
+uses menu, teor;
+
+{$R *.dfm}
+
+procedure TfrmMap.plusMouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+timer1.Enabled:=true;
+end;
+
+procedure TfrmMap.plusMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+timer1.Enabled:=false;
+end;
+
+procedure TfrmMap.minusMouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+timer2.Enabled:=true;
+end;
+
+procedure TfrmMap.minusMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+timer2.Enabled:=false;
+end;
+
+procedure TfrmMap.Button4Click(Sender: TObject);
+var
+i:integer;
+begin
+yo:=image.Height/100;
+xo:=image.Width/100;
+yi:=image.Height;
+xi:=image.Width;
+
+for I := 1 to Npark do
+begin
+xob[i]:=knw_h[i].X/100;
+yob[i]:=knw_h[i].Y/100;
+xb[i]:=knw_h[i].X;
+yb[i]:=knw_h[i].Y;
+xtb[i]:=(knt_l[i].X-image.Left)/100;
+ytb[i]:=(knt_l[i].Y-image.Top)/100;
+xt[i]:=knt_l[i].X;
+yt[i]:=knt_l[i].Y;
+end;
+end;
+
+procedure TfrmMap.saveiClick(Sender: TObject);
+begin
+knw_h[1].X:=image1.Width;
+knw_h[1].Y:=image1.Height;
+knt_l[1].X:=image1.Left;
+knt_l[1].Y:=image1.Top;
+
+knw_h[2].X:=image2.Width;
+knw_h[2].Y:=image2.Height;
+knt_l[2].X:=image2.Left;
+knt_l[2].Y:=image2.Top;
+
+knw_h[3].X:=image3.Width;
+knw_h[3].Y:=image3.Height;
+knt_l[3].X:=image3.Left;
+knt_l[3].Y:=image3.Top;
+
+knw_h[4].X:=image4.Width;
+knw_h[4].Y:=image4.Height;
+knt_l[4].X:=image4.Left;
+knt_l[4].Y:=image4.Top;
+
+knw_h[5].X:=image5.Width;
+knw_h[5].Y:=image5.Height;
+knt_l[5].X:=image5.Left;
+knt_l[5].Y:=image5.Top;
+
+knw_h[6].X:=image6.Width;
+knw_h[6].Y:=image6.Height;
+knt_l[6].X:=image6.Left;
+knt_l[6].Y:=image6.Top;
+
+knw_h[7].X:=image7.Width;
+knw_h[7].Y:=image7.Height;
+knt_l[7].X:=image7.Left;
+knt_l[7].Y:=image7.Top;
+
+knw_h[8].X:=image8.Width;
+knw_h[8].Y:=image8.Height;
+knt_l[8].X:=image8.Left;
+knt_l[8].Y:=image8.Top;
+
+knw_h[9].X:=image9.Width;
+knw_h[9].Y:=image9.Height;
+knt_l[9].X:=image9.Left;
+knt_l[9].Y:=image9.Top;
+
+knw_h[10].X:=image10.Width;
+knw_h[10].Y:=image10.Height;
+knt_l[10].X:=image10.Left;
+knt_l[10].Y:=image10.Top;
+
+knw_h[11].X:=image11.Width;
+knw_h[11].Y:=image11.Height;
+knt_l[11].X:=image11.Left;
+knt_l[11].Y:=image11.Top;
+
+knw_h[12].X:=image12.Width;
+knw_h[12].Y:=image12.Height;
+knt_l[12].X:=image12.Left;
+knt_l[12].Y:=image12.Top;
+
+knw_h[13].X:=image13.Width;
+knw_h[13].Y:=image13.Height;
+knt_l[13].X:=image13.Left;
+knt_l[13].Y:=image13.Top;
+
+knw_h[14].X:=image14.Width;
+knw_h[14].Y:=image14.Height;
+knt_l[14].X:=image14.Left;
+knt_l[14].Y:=image14.Top;
+
+knw_h[15].X:=image15.Width;
+knw_h[15].Y:=image15.Height;
+knt_l[15].X:=image15.Left;
+knt_l[15].Y:=image15.Top;
+
+knw_h[16].X:=image16.Width;
+knw_h[16].Y:=image16.Height;
+knt_l[16].X:=image16.Left;
+knt_l[16].Y:=image16.Top;
+
+knw_h[17].X:=image17.Width;
+knw_h[17].Y:=image17.Height;
+knt_l[17].X:=image17.Left;
+knt_l[17].Y:=image17.Top;
+
+knw_h[18].X:=image18.Width;
+knw_h[18].Y:=image18.Height;
+knt_l[18].X:=image18.Left;
+knt_l[18].Y:=image18.Top;
+
+knw_h[19].X:=image19.Width;
+knw_h[19].Y:=image19.Height;
+knt_l[19].X:=image19.Left;
+knt_l[19].Y:=image19.Top;
+
+knw_h[20].X:=image20.Width;
+knw_h[20].Y:=image20.Height;
+knt_l[20].X:=image20.Left;
+knt_l[20].Y:=image20.Top;
+
+knw_h[21].X:=image21.Width;
+knw_h[21].Y:=image21.Height;
+knt_l[21].X:=image21.Left;
+knt_l[21].Y:=image21.Top;
+
+knw_h[22].X:=image22.Width;
+knw_h[22].Y:=image22.Height;
+knt_l[22].X:=image22.Left;
+knt_l[22].Y:=image22.Top;
+
+knw_h[23].X:=image23.Width;
+knw_h[23].Y:=image23.Height;
+knt_l[23].X:=image23.Left;
+knt_l[23].Y:=image23.Top;
+
+knw_h[24].X:=image24.Width;
+knw_h[24].Y:=image24.Height;
+knt_l[24].X:=image24.Left;
+knt_l[24].Y:=image24.Top;
+
+knw_h[25].X:=image25.Width;
+knw_h[25].Y:=image25.Height;
+knt_l[25].X:=image25.Left;
+knt_l[25].Y:=image25.Top;
+
+knw_h[26].X:=image26.Width;
+knw_h[26].Y:=image26.Height;
+knt_l[26].X:=image26.Left;
+knt_l[26].Y:=image26.Top;
+
+knw_h[27].X:=image27.Width;
+knw_h[27].Y:=image27.Height;
+knt_l[27].X:=image27.Left;
+knt_l[27].Y:=image27.Top;
+
+knw_h[28].X:=image28.Width;
+knw_h[28].Y:=image28.Height;
+knt_l[28].X:=image28.Left;
+knt_l[28].Y:=image28.Top;
+
+knw_h[29].X:=image29.Width;
+knw_h[29].Y:=image29.Height;
+knt_l[29].X:=image29.Left;
+knt_l[29].Y:=image29.Top;
+
+knw_h[30].X:=image30.Width;
+knw_h[30].Y:=image30.Height;
+knt_l[30].X:=image30.Left;
+knt_l[30].Y:=image30.Top;
+
+knw_h[31].X:=image31.Width;
+knw_h[31].Y:=image31.Height;
+knt_l[31].X:=image31.Left;
+knt_l[31].Y:=image31.Top;
+
+knw_h[32].X:=image32.Width;
+knw_h[32].Y:=image32.Height;
+knt_l[32].X:=image32.Left;
+knt_l[32].Y:=image32.Top;
+
+knw_h[33].X:=image33.Width;
+knw_h[33].Y:=image33.Height;
+knt_l[33].X:=image33.Left;
+knt_l[33].Y:=image33.Top;
+
+knw_h[34].X:=image34.Width;
+knw_h[34].Y:=image34.Height;
+knt_l[34].X:=image34.Left;
+knt_l[34].Y:=image34.Top;
+
+knw_h[35].X:=image35.Width;
+knw_h[35].Y:=image35.Height;
+knt_l[35].X:=image35.Left;
+knt_l[35].Y:=image35.Top;
+
+knw_h[36].X:=image36.Width;
+knw_h[36].Y:=image36.Height;
+knt_l[36].X:=image36.Left;
+knt_l[36].Y:=image36.Top;
+
+knw_h[37].X:=image37.Width;
+knw_h[37].Y:=image37.Height;
+knt_l[37].X:=image37.Left;
+knt_l[37].Y:=image37.Top;
+
+knw_h[38].X:=image38.Width;
+knw_h[38].Y:=image38.Height;
+knt_l[38].X:=image38.Left;
+knt_l[38].Y:=image38.Top;
+
+knw_h[39].X:=image39.Width;
+knw_h[39].Y:=image39.Height;
+knt_l[39].X:=image39.Left;
+knt_l[39].Y:=image39.Top;
+
+knw_h[40].X:=image40.Width;
+knw_h[40].Y:=image40.Height;
+knt_l[40].X:=image40.Left;
+knt_l[40].Y:=image40.Top;
+
+knw_h[41].X:=image41.Width;
+knw_h[41].Y:=image41.Height;
+knt_l[41].X:=image41.Left;
+knt_l[41].Y:=image41.Top;
+
+knw_h[42].X:=image42.Width;
+knw_h[42].Y:=image42.Height;
+knt_l[42].X:=image42.Left;
+knt_l[42].Y:=image42.Top;
+
+knw_h[43].X:=image43.Width;
+knw_h[43].Y:=image43.Height;
+knt_l[43].X:=image43.Left;
+knt_l[43].Y:=image43.Top;
+
+end;
+
+procedure TfrmMap.loadeClick(Sender: TObject);
+begin
+image1.Width:=  knw_h[1].X;
+image1.Height:= knw_h[1].Y;
+image1.Left:=   knt_l[1].X;
+image1.Top:=    knt_l[1].Y;
+
+image2.Width:=  knw_h[2].X;
+image2.Height:= knw_h[2].Y;
+image2.Left:=   knt_l[2].X;
+image2.Top:=    knt_l[2].Y;
+
+image3.Width:=  knw_h[3].X;
+image3.Height:= knw_h[3].Y;
+image3.Left:=   knt_l[3].X;
+image3.Top:=    knt_l[3].Y;
+
+image4.Width:=  knw_h[4].X;
+image4.Height:= knw_h[4].Y;
+image4.Left:=   knt_l[4].X;
+image4.Top:=    knt_l[4].Y;
+
+image5.Width:=  knw_h[5].X;
+image5.Height:= knw_h[5].Y;
+image5.Left:=   knt_l[5].X;
+image5.Top:=    knt_l[5].Y;
+
+image6.Width:=  knw_h[6].X;
+image6.Height:= knw_h[6].Y;
+image6.Left:=   knt_l[6].X;
+image6.Top:=    knt_l[6].Y;
+
+image7.Width:=  knw_h[7].X;
+image7.Height:= knw_h[7].Y;
+image7.Left:=   knt_l[7].X;
+image7.Top:=    knt_l[7].Y;
+
+image8.Width:=  knw_h[8].X;
+image8.Height:= knw_h[8].Y;
+image8.Left:=   knt_l[8].X;
+image8.Top:=    knt_l[8].Y;
+
+image9.Width:=  knw_h[9].X;
+image9.Height:= knw_h[9].Y;
+image9.Left:=   knt_l[9].X;
+image9.Top:=    knt_l[9].Y;
+
+image10.Width:=  knw_h[10].X;
+image10.Height:= knw_h[10].Y;
+image10.Left:=   knt_l[10].X;
+image10.Top:=    knt_l[10].Y;
+
+image11.Width:=  knw_h[11].X;
+image11.Height:= knw_h[11].Y;
+image11.Left:=   knt_l[11].X;
+image11.Top:=    knt_l[11].Y;
+
+image12.Width:=  knw_h[12].X;
+image12.Height:= knw_h[12].Y;
+image12.Left:=   knt_l[12].X;
+image12.Top:=    knt_l[12].Y;
+
+image13.Width:=  knw_h[13].X;
+image13.Height:= knw_h[13].Y;
+image13.Left:=   knt_l[13].X;
+image13.Top:=    knt_l[13].Y;
+
+image14.Width:=  knw_h[14].X;
+image14.Height:= knw_h[14].Y;
+image14.Left:=   knt_l[14].X;
+image14.Top:=    knt_l[14].Y;
+
+image15.Width:=  knw_h[15].X;
+image15.Height:= knw_h[15].Y;
+image15.Left:=   knt_l[15].X;
+image15.Top:=    knt_l[15].Y;
+
+image16.Width:=  knw_h[16].X;
+image16.Height:= knw_h[16].Y;
+image16.Left:=   knt_l[16].X;
+image16.Top:=    knt_l[16].Y;
+
+image17.Width:=  knw_h[17].X;
+image17.Height:= knw_h[17].Y;
+image17.Left:=   knt_l[17].X;
+image17.Top:=    knt_l[17].Y;
+
+image18.Width:=  knw_h[18].X;
+image18.Height:= knw_h[18].Y;
+image18.Left:=   knt_l[18].X;
+image18.Top:=    knt_l[18].Y;
+
+image19.Width:=  knw_h[19].X;
+image19.Height:= knw_h[19].Y;
+image19.Left:=   knt_l[19].X;
+image19.Top:=    knt_l[19].Y;
+
+image20.Width:=  knw_h[20].X;
+image20.Height:= knw_h[20].Y;
+image20.Left:=   knt_l[20].X;
+image20.Top:=    knt_l[20].Y;
+
+image21.Width:=  knw_h[21].X;
+image21.Height:= knw_h[21].Y;
+image21.Left:=   knt_l[21].X;
+image21.Top:=    knt_l[21].Y;
+
+image22.Width:=  knw_h[22].X;
+image22.Height:= knw_h[22].Y;
+image22.Left:=   knt_l[22].X;
+image22.Top:=    knt_l[22].Y;
+
+image23.Width:=  knw_h[23].X;
+image23.Height:= knw_h[23].Y;
+image23.Left:=   knt_l[23].X;
+image23.Top:=    knt_l[23].Y;
+
+image24.Width:=  knw_h[24].X;
+image24.Height:= knw_h[24].Y;
+image24.Left:=   knt_l[24].X;
+image24.Top:=    knt_l[24].Y;
+
+image25.Width:=  knw_h[25].X;
+image25.Height:= knw_h[25].Y;
+image25.Left:=   knt_l[25].X;
+image25.Top:=    knt_l[25].Y;
+
+image26.Width:=  knw_h[26].X;
+image26.Height:= knw_h[26].Y;
+image26.Left:=   knt_l[26].X;
+image26.Top:=    knt_l[26].Y;
+
+image27.Width:=  knw_h[27].X;
+image27.Height:= knw_h[27].Y;
+image27.Left:=   knt_l[27].X;
+image27.Top:=    knt_l[27].Y;
+
+image28.Width:=  knw_h[28].X;
+image28.Height:= knw_h[28].Y;
+image28.Left:=   knt_l[28].X;
+image28.Top:=    knt_l[28].Y;
+
+image29.Width:=  knw_h[29].X;
+image29.Height:= knw_h[29].Y;
+image29.Left:=   knt_l[29].X;
+image29.Top:=    knt_l[29].Y;
+
+image30.Width:=  knw_h[30].X;
+image30.Height:= knw_h[30].Y;
+image30.Left:=   knt_l[30].X;
+image30.Top:=    knt_l[30].Y;
+
+image31.Width:=  knw_h[31].X;
+image31.Height:= knw_h[31].Y;
+image31.Left:=   knt_l[31].X;
+image31.Top:=    knt_l[31].Y;
+
+image32.Width:=  knw_h[32].X;
+image32.Height:= knw_h[32].Y;
+image32.Left:=   knt_l[32].X;
+image32.Top:=    knt_l[32].Y;
+
+image33.Width:=  knw_h[33].X;
+image33.Height:= knw_h[33].Y;
+image33.Left:=   knt_l[33].X;
+image33.Top:=    knt_l[33].Y;
+
+image34.Width:=  knw_h[34].X;
+image34.Height:= knw_h[34].Y;
+image34.Left:=   knt_l[34].X;
+image34.Top:=    knt_l[34].Y;
+
+image35.Width:=  knw_h[35].X;
+image35.Height:= knw_h[35].Y;
+image35.Left:=   knt_l[35].X;
+image35.Top:=    knt_l[35].Y;
+
+image36.Width:=  knw_h[36].X;
+image36.Height:= knw_h[36].Y;
+image36.Left:=   knt_l[36].X;
+image36.Top:=    knt_l[36].Y;
+
+image37.Width:=  knw_h[37].X;
+image37.Height:= knw_h[37].Y;
+image37.Left:=   knt_l[37].X;
+image37.Top:=    knt_l[37].Y;
+
+image38.Width:=  knw_h[38].X;
+image38.Height:= knw_h[38].Y;
+image38.Left:=   knt_l[38].X;
+image38.Top:=    knt_l[38].Y;
+
+image39.Width:=  knw_h[39].X;
+image39.Height:= knw_h[39].Y;
+image39.Left:=   knt_l[39].X;
+image39.Top:=    knt_l[39].Y;
+
+image40.Width:=  knw_h[40].X;
+image40.Height:= knw_h[40].Y;
+image40.Left:=   knt_l[40].X;
+image40.Top:=    knt_l[40].Y;
+
+image41.Width:=  knw_h[41].X;
+image41.Height:= knw_h[41].Y;
+image41.Left:=   knt_l[41].X;
+image41.Top:=    knt_l[41].Y;
+
+image42.Width:=  knw_h[42].X;
+image42.Height:= knw_h[42].Y;
+image42.Left:=   knt_l[42].X;
+image42.Top:=    knt_l[42].Y;
+
+image43.Width:=  knw_h[43].X;
+image43.Height:= knw_h[43].Y;
+image43.Left:=   knt_l[43].X;
+image43.Top:=    knt_l[43].Y;
+
+
+end;
+
+procedure TfrmMap.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+begin
+application.Terminate;
+end;
+
+procedure TfrmMap.FormCreate(Sender: TObject);
+begin
+dktf:=0;
+savei.Click;
+webbrowser1.Enabled:=false;
+button4.Click;
+doublebuffered:=true;
+webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\map.htm');
+end;
+
+procedure TfrmMap.FormResize(Sender: TObject);
+begin
+fon1.Top:=frmMap.Top-60;
+fon1.Left:=frmMap.Left;
+fon1.Width:=frmMap.Width+400;
+fon1.Height:=frmMap.Height+300;
+end;
+
+procedure TfrmMap.ImageMouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+rt:=true;
+mx:=X;
+my:=Y;
+end;
+
+procedure TfrmMap.ImageMouseMove(Sender: TObject; Shift: TShiftState; X,
+  Y: Integer);
+  var
+  i:integer;
+  begin
+if rt then
+begin
+ image.Top:=image.Top-my+y;
+ image.Left:=image.Left-mx+x;
+
+ for i := 1 to Npark do
+begin
+ knt_l[i].Y:=knt_l[i].Y-my+y;
+ knt_l[i].X:=knt_l[i].X-mx+x;
+ xt[i]:=xt[i]-mx+x;
+ yt[i]:=yt[i]-my+y;
+ application.ProcessMessages;
+end;
+
+end;
+end;
+
+procedure TfrmMap.ImageMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+rt:=false;
+end;
+
+procedure TfrmMap.Image10Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Auyuittuq National Park of Canada\Auyuittuq National Park of Canada.htm');
+frmTeory.Caption:='Auyuittuq National Park of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image11Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Ukkusiksalik National Park of Canada\Ukkusiksalik National Park of Canada.htm');
+frmTeory.Caption:='Ukkusiksalik National Park of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image12Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Wood Buffalo National Park of Canada\Wood Buffalo National Park of Canada.htm');
+frmTeory.Caption:='Wood Buffalo National Park of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image13Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Gwaii Haanas National Park & Reserve of Canada\Gwaii Haanas National Park & Reserve of Canada.htm');
+frmTeory.Caption:='Gwaii Haanas National Park & Reserve of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image14Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Pacific Rim National Park Reserve of Canada\Pacific Rim National Park Reserve of Canada.htm');
+frmTeory.Caption:='Pacific Rim National Park Reserve of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image15Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Gulf Islands National Park Reserve of Canada\Gulf Islands National Park Reserve of Canada.htm');
+frmTeory.Caption:='Gulf Islands National Park Reserve of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image16Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Mount Revelstoke National Park of Canada\Mount Revelstoke National Park of Canada.htm');
+frmTeory.Caption:='Mount Revelstoke National Park of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image17Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Glacier National Park of Canada\Glacier National Park of Canada.htm');
+frmTeory.Caption:='Glacier National Park of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image18Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Jasper National Park of Canada\Jasper National Park of Canada.htm');
+frmTeory.Caption:='Jasper National Park of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image19Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Yoho National Park of Canada\Yoho National Park of Canada.htm');
+frmTeory.Caption:='Yoho National Park of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image1Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Ivvavik National Park of Canada\Ivvavik National Park of Canada.htm');
+frmTeory.Caption:='Ivvavik National Park of Canada';
+frmTeory.Show;
+end;
+
+
+procedure TfrmMap.Image20Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Banff National Park of Canada\Banff National Park of Canada.htm');
+frmTeory.Caption:='Banff National Park of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image21Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Kootenay National Park of Canada\Kootenay National Park of Canada.htm');
+frmTeory.Caption:='Kootenay National Park of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image22Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Waterton Lakes National Park of Canada\Waterton Lakes National Park of Canada.htm');
+frmTeory.Caption:='Waterton Lakes National Park of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image23Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Elk Island National Park of Canada\Elk Island National Park of Canada.htm');
+frmTeory.Caption:='Elk Island National Park of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image24Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Prince Albert National Park\Prince Albert National Park.htm');
+frmTeory.Caption:='Prince Albert National Park';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image25Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Grasslands National Park\Grasslands National Park.htm');
+frmTeory.Caption:='Grasslands National Park';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image26Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Riding Mountain National Park of Canada\Riding Mountain National Park of Canada.htm');
+frmTeory.Caption:='Riding Mountain National Park of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image27Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Wapusk National Park of Canada\Wapusk National Park of Canada.htm');
+frmTeory.Caption:='Wapusk National Park of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image28Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Pukaskwa National Park of Canada\Pukaskwa National Park of Canada.htm');
+frmTeory.Caption:='Pukaskwa National Park of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image29Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Georgian Bay Islands National Park of Canada\Georgian Bay Islands National Park of Canada.htm');
+frmTeory.Caption:='Georgian Bay Islands National Park of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image2Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Vuntut National Park of Canada\Vuntut National Park of Canada.htm');
+frmTeory.Caption:='Vuntut National Park of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image2MouseEnter(Sender: TObject);
+begin
+scrollbox2.Visible:=true;
+
+end;
+
+procedure TfrmMap.Image2MouseLeave(Sender: TObject);
+begin
+scrollbox2.Visible:=false;
+end;
+
+procedure TfrmMap.Image30Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Bruce Peninsula National Park of Canada\Bruce Peninsula National Park of Canada.htm');
+frmTeory.Caption:='Bruce Peninsula National Park of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image31Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Point Pelee National Park of Canada\Point Pelee National Park of Canada.htm');
+frmTeory.Caption:='Point Pelee National Park of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image32Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\St. Lawrence Islands National Park of Canada\St. Lawrence Islands National Park of Canada.htm');
+frmTeory.Caption:='St. Lawrence Islands National Park of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image33Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\La Mauricie National Park of Canada\La Mauricie National Park of Canada.htm');
+frmTeory.Caption:='La Mauricie National Park of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image34Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Torngat Mountains National Park of Canada\Torngat Mountains National Park of Canada.htm');
+frmTeory.Caption:='Torngat Mountains National Park of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image35Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Terra Nova National Park of Canada\Terra Nova National Park of Canada.htm');
+frmTeory.Caption:='Terra Nova National Park of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image36Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Gros Morne National Park of Canada\Gros Morne National Park of Canada.htm');
+frmTeory.Caption:='Gros Morne National Park of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image37Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Mingan Archipelago National Park Reserve of Canada\Mingan Archipelago National Park Reserve of Canada.htm');
+frmTeory.Caption:='Mingan Archipelago National Park Reserve of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image38Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Forillon National Park of Canada\Forillon National Park of Canada.htm');
+frmTeory.Caption:='Forillon National Park of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image39Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Prince Edward Island National Park of Canada\Prince Edward Island National Park of Canada.htm');
+frmTeory.Caption:='Prince Edward Island National Park of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image3Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Kluane National Park and Reserve of Canada\Kluane National Park and Reserve of Canada.htm');
+frmTeory.Caption:='Kluane National Park and Reserve of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image40Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Cape Breton Highlands National Park of Canada\Cape Breton Highlands National Park of Canada.htm');
+frmTeory.Caption:='Cape Breton Highlands National Park of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image41Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Kouchibouguac National Park of Canada\Kouchibouguac National Park of Canada.htm');
+frmTeory.Caption:='Kouchibouguac National Park of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image42Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Fundy National Park of Canada\Fundy National Park of Canada.htm');
+frmTeory.Caption:='Fundy National Park of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image43Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Kejimkujik National Park of Canada\Kejimkujik National Park of Canada.htm');
+frmTeory.Caption:='Kejimkujik National Park of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image4Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Nahanni National Park Reserve of Canada\Nahanni National Park Reserve of Canada.htm');
+frmTeory.Caption:='Nahanni National Park Reserve of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image5Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Tuktut Nogait National Park of Canada\Tuktut Nogait National Park of Canada.htm');
+frmTeory.Caption:='Tuktut Nogait National Park of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image6Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Aulavik National Park of Canada\Aulavik National Park of Canada.htm');
+frmTeory.Caption:='Aulavik National Park of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image7Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Northern Bathurst Island National Park of Canada\Northern Bathurst Island National Park of Canada.htm');
+frmTeory.Caption:='Northern Bathurst Island National Park of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image8Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Quttinirpaaq National Park of Canada\Quttinirpaaq National Park of Canada.htm');
+frmTeory.Caption:='Quttinirpaaq National Park of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.Image9Click(Sender: TObject);
+begin
+frmTeory.webbrowser1.Navigate(extractfilepath(paramstr(0))+'source\map\parks\Sirmilik National Park of Canada\Sirmilik National Park of Canada.htm');
+frmTeory.Caption:='Sirmilik National Park of Canada';
+frmTeory.Show;
+end;
+
+procedure TfrmMap.ImagelClick(Sender: TObject);
+begin
+frmMap.Hide;
+frmMenu.show;
+end;
+
+procedure TfrmMap.ImagelMouseEnter(Sender: TObject);
+begin
+imagel.Picture.LoadFromFile(extractfilepath(paramstr(0))+'source\stuff\4.png');
+end;
+
+procedure TfrmMap.ImagelMouseLeave(Sender: TObject);
+begin
+imagel.Picture.LoadFromFile(extractfilepath(paramstr(0))+'source\stuff\3.png');
+end;
+
+procedure TfrmMap.resizeimage(dkt:integer);
+var
+i:integer;
+begin
+
+image.Width:=round(xi+dkt*xo);
+image.Height:=round(yi+dkt*yo);
+
+for I := 1 to Npark do
+  begin
+knw_h[i].X:=round(xb[i]+dkt*xob[i]);
+knw_h[i].Y:=round(yb[i]+dkt*yob[i]);
+knt_l[i].X:=round(xt[i]+dkt*xtb[i]);
+knt_l[i].Y:=round(yt[i]+dkt*ytb[i]);
+  end;
+application.ProcessMessages;
+
+end;
+
+procedure TfrmMap.Timer1Timer(Sender: TObject);
+begin
+ resizeimage(dktf);
+ if dktf<150 then
+ dktf:=dktf+1;
+ label1.Caption:=inttostr(dktf);
+end;
+
+procedure TfrmMap.Timer2Timer(Sender: TObject);
+begin
+resizeimage(dktf);
+if dktf>-30 then
+ dktf:=dktf-1;
+ label1.Caption:=inttostr(dktf);
+end;
+
+procedure TfrmMap.Timer3Timer(Sender: TObject);
+begin
+loade.Click;
+application.ProcessMessages;
+end;
+
+procedure TfrmMap.Timer4Timer(Sender: TObject);
+begin
+scrollbox2.Left:=round((frmMap.Width/2)-(scrollbox2.Width/2))-50;
+scrollbox1.Left:=frmMap.Width-scrollbox1.Width-10;
+end;
+
+end.

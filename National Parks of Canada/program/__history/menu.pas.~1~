@@ -1,0 +1,302 @@
+unit menu;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, jpeg, ExtCtrls, StdCtrls, pngimage;
+
+type
+  TfrmMenu = class(TForm)
+    fon1: TImage;
+    Image2: TImage;
+    Label1: TLabel;
+    Image1: TImage;
+    Image3: TImage;
+    Label2: TLabel;
+    Image4: TImage;
+    Label3: TLabel;
+    Image5: TImage;
+    Label4: TLabel;
+    Image7: TImage;
+    Image8: TImage;
+    Image10: TImage;
+    Label10: TLabel;
+    Image11: TImage;
+    Label11: TLabel;
+    ImageBlack: TImage;
+    Image12: TImage;
+    Label12: TLabel;
+    Image13: TImage;
+    Label13: TLabel;
+    procedure FormResize(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure Image2MouseEnter(Sender: TObject);
+    procedure Image2MouseLeave(Sender: TObject);
+    procedure Image2Click(Sender: TObject);
+    procedure Image3MouseEnter(Sender: TObject);
+    procedure Image3MouseLeave(Sender: TObject);
+    procedure Image3Click(Sender: TObject);
+    procedure Image4MouseEnter(Sender: TObject);
+    procedure Image4MouseLeave(Sender: TObject);
+    procedure Image4Click(Sender: TObject);
+    procedure Image5MouseEnter(Sender: TObject);
+    procedure Image5MouseLeave(Sender: TObject);
+    procedure Image5Click(Sender: TObject);
+    procedure Image7MouseEnter(Sender: TObject);
+    procedure Image7MouseLeave(Sender: TObject);
+    procedure Image7Click(Sender: TObject);
+    procedure Image8MouseEnter(Sender: TObject);
+    procedure Image8MouseLeave(Sender: TObject);
+    procedure Image8Click(Sender: TObject);
+    procedure Label5Click(Sender: TObject);
+    procedure Image10MouseEnter(Sender: TObject);
+    procedure Image10MouseLeave(Sender: TObject);
+    procedure Image11MouseEnter(Sender: TObject);
+    procedure Image11MouseLeave(Sender: TObject);
+    procedure Image11Click(Sender: TObject);
+    procedure Image10Click(Sender: TObject);
+    procedure Image12Click(Sender: TObject);
+    procedure Image13Click(Sender: TObject);
+    procedure Image12MouseEnter(Sender: TObject);
+    procedure Image12MouseLeave(Sender: TObject);
+    procedure Image13MouseEnter(Sender: TObject);
+    procedure Image13MouseLeave(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmMenu: TfrmMenu;
+
+implementation
+
+uses  slide, gam, map, bdmain, video, choosegame;
+
+{$R *.dfm}
+
+procedure TfrmMenu.FormCreate(Sender: TObject);
+begin
+doublebuffered:=true;
+label1.OnClick:=image2.OnClick;
+label1.OnMouseEnter:=image2.OnMouseEnter;
+label2.OnClick:=image3.OnClick;
+label2.OnMouseEnter:=image3.OnMouseEnter;
+label3.OnClick:=image4.OnClick;
+label3.OnMouseEnter:=image4.OnMouseEnter;
+label4.OnClick:=image5.OnClick;
+label4.OnMouseEnter:=image5.OnMouseEnter;
+label10.OnClick:=image10.OnClick;
+label10.OnMouseEnter:=image10.OnMouseEnter;
+label11.OnClick:=image11.OnClick;
+label11.OnMouseEnter:=image11.OnMouseEnter;
+label12.OnClick:=image12.OnClick;
+label12.OnMouseEnter:=image12.OnMouseEnter;
+label13.OnClick:=image13.OnClick;
+label13.OnMouseEnter:=image13.OnMouseEnter;
+end;
+
+procedure TfrmMenu.FormResize(Sender: TObject);
+begin
+fon1.Top:=frmMenu.Top-60;
+fon1.Left:=frmMenu.Left;
+fon1.Width:=frmMenu.Width+400;
+fon1.Height:=frmMenu.Height+300;
+image1.Top:=frmMenu.Top+30;
+image1.Left:=frmMenu.Left+frmMenu.Width-image1.Width;
+image7.Top:=frmMenu.Top+10;
+image7.Left:=frmMenu.Left+frmMenu.Width-60;
+image8.Top:=frmMenu.Top+4;
+image8.Left:=frmMenu.Left+frmMenu.Width-105;
+end;
+
+procedure TfrmMenu.Image10Click(Sender: TObject);
+begin
+winexec('source/barley-break/Project1.exe',SW_NORMAL);
+imageblack.Visible:=false;
+image10.Visible:=false;
+label10.Visible:=false;
+image11.Visible:=false;
+label11.Visible:=false;
+end;
+
+procedure TfrmMenu.Image10MouseEnter(Sender: TObject);
+begin
+image10.Picture.LoadFromFile(extractfilepath(paramstr(0))+'source\stuff\1.png');
+end;
+
+procedure TfrmMenu.Image10MouseLeave(Sender: TObject);
+begin
+image10.Picture.LoadFromFile(extractfilepath(paramstr(0))+'source\stuff\2.png');
+end;
+
+procedure TfrmMenu.Image11Click(Sender: TObject);
+begin
+frmMenu.Hide;
+frmGame.Show;
+imageblack.Visible:=false;
+image10.Visible:=false;
+label10.Visible:=false;
+image11.Visible:=false;
+label11.Visible:=false;
+end;
+
+procedure TfrmMenu.Image11MouseEnter(Sender: TObject);
+begin
+image11.Picture.LoadFromFile(extractfilepath(paramstr(0))+'source\stuff\1.png');
+end;
+
+procedure TfrmMenu.Image11MouseLeave(Sender: TObject);
+begin
+image11.Picture.LoadFromFile(extractfilepath(paramstr(0))+'source\stuff\2.png');
+end;
+
+procedure TfrmMenu.Image12Click(Sender: TObject);
+begin
+frmMenu.Hide;
+frmSlider.Show;
+imageblack.Visible:=false;
+image12.Visible:=false;
+label12.Visible:=false;
+image13.Visible:=false;
+label13.Visible:=false;
+end;
+
+procedure TfrmMenu.Image12MouseEnter(Sender: TObject);
+begin
+image12.Picture.LoadFromFile(extractfilepath(paramstr(0))+'source\stuff\1.png');
+end;
+
+procedure TfrmMenu.Image12MouseLeave(Sender: TObject);
+begin
+image12.Picture.LoadFromFile(extractfilepath(paramstr(0))+'source\stuff\2.png');
+end;
+
+procedure TfrmMenu.Image13Click(Sender: TObject);
+begin
+frmVideo.Show;
+imageblack.Visible:=false;
+image12.Visible:=false;
+label12.Visible:=false;
+image13.Visible:=false;
+label13.Visible:=false;
+end;
+
+procedure TfrmMenu.Image13MouseEnter(Sender: TObject);
+begin
+image13.Picture.LoadFromFile(extractfilepath(paramstr(0))+'source\stuff\1.png');
+end;
+
+procedure TfrmMenu.Image13MouseLeave(Sender: TObject);
+begin
+image13.Picture.LoadFromFile(extractfilepath(paramstr(0))+'source\stuff\2.png');
+end;
+
+procedure TfrmMenu.Image2Click(Sender: TObject);
+begin
+frmMap.show;
+frmMenu.Hide;
+end;
+
+procedure TfrmMenu.Image2MouseEnter(Sender: TObject);
+begin
+image2.Picture.LoadFromFile(extractfilepath(paramstr(0))+'source\stuff\1.png');
+end;
+
+procedure TfrmMenu.Image2MouseLeave(Sender: TObject);
+begin
+image2.Picture.LoadFromFile(extractfilepath(paramstr(0))+'source\stuff\2.png');
+end;
+
+procedure TfrmMenu.Image3Click(Sender: TObject);
+begin
+imageblack.Visible:=true;
+image12.Visible:=true;
+label12.Visible:=true;
+image13.Visible:=true;
+label13.Visible:=true;
+end;
+
+procedure TfrmMenu.Image3MouseEnter(Sender: TObject);
+begin
+image3.Picture.LoadFromFile(extractfilepath(paramstr(0))+'source\stuff\1.png');
+end;
+
+procedure TfrmMenu.Image3MouseLeave(Sender: TObject);
+begin
+image3.Picture.LoadFromFile(extractfilepath(paramstr(0))+'source\stuff\2.png');
+end;
+
+procedure TfrmMenu.Image4Click(Sender: TObject);
+begin
+Image10.Visible:=true;
+label10.Visible:=true;
+Image11.Visible:=true;
+label11.Visible:=true;
+imageblack.Visible:=true;
+end;
+
+procedure TfrmMenu.Image4MouseEnter(Sender: TObject);
+begin
+image4.Picture.LoadFromFile(extractfilepath(paramstr(0))+'source\stuff\1.png');
+end;
+
+procedure TfrmMenu.Image4MouseLeave(Sender: TObject);
+begin
+image4.Picture.LoadFromFile(extractfilepath(paramstr(0))+'source\stuff\2.png');
+end;
+
+procedure TfrmMenu.Image5Click(Sender: TObject);
+begin
+frmDatabase.show;
+//frmMenu.Hide;
+end;
+
+procedure TfrmMenu.Image5MouseEnter(Sender: TObject);
+begin
+image5.Picture.LoadFromFile(extractfilepath(paramstr(0))+'source\stuff\1.png');
+end;
+
+procedure TfrmMenu.Image5MouseLeave(Sender: TObject);
+begin
+image5.Picture.LoadFromFile(extractfilepath(paramstr(0))+'source\stuff\2.png');
+end;
+
+procedure TfrmMenu.Image7Click(Sender: TObject);
+begin
+application.Terminate;
+end;
+
+procedure TfrmMenu.Image7MouseEnter(Sender: TObject);
+begin
+image7.Picture.LoadFromFile(extractfilepath(paramstr(0))+'source\stuff\exit_2.png');
+end;
+
+procedure TfrmMenu.Image7MouseLeave(Sender: TObject);
+begin
+image7.Picture.LoadFromFile(extractfilepath(paramstr(0))+'source\stuff\exit_1.png');
+end;
+
+procedure TfrmMenu.Image8Click(Sender: TObject);
+begin
+Application.minimize;
+end;
+
+procedure TfrmMenu.Image8MouseEnter(Sender: TObject);
+begin
+image8.Picture.LoadFromFile(extractfilepath(paramstr(0))+'source/stuff/minimize_2.png');
+end;
+
+procedure TfrmMenu.Image8MouseLeave(Sender: TObject);
+begin
+image8.Picture.LoadFromFile(extractfilepath(paramstr(0))+'source/stuff/minimize_1.png');
+end;
+
+procedure TfrmMenu.Label5Click(Sender: TObject);
+begin
+frmVideo.show;
+end;
+
+end.

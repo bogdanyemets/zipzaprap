@@ -1,0 +1,56 @@
+unit video;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, jpeg, ExtCtrls, MPlayer;
+
+type
+  TfrmVideo = class(TForm)
+    MediaPlayer1: TMediaPlayer;
+    MediaPlayer2: TMediaPlayer;
+    MediaPlayer3: TMediaPlayer;
+    ScrollBox1: TScrollBox;
+    Image1: TImage;
+    Image2: TImage;
+    Image3: TImage;
+    procedure Image1Click(Sender: TObject);
+    procedure Image2Click(Sender: TObject);
+    procedure Image3Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmVideo: TfrmVideo;
+
+implementation
+
+{$R *.dfm}
+
+
+procedure TfrmVideo.Image1Click(Sender: TObject);
+begin
+MediaPlayer1.FileName:=extractfilePath(paramstr(0))+'video\Parks Can Can Canada_wmv.wmv';
+MediaPlayer1.Open;
+MediaPlayer1.Play;
+end;
+
+procedure TfrmVideo.Image2Click(Sender: TObject);
+begin
+MediaPlayer2.FileName:=extractfilePath(paramstr(0))+'video\Jasper National Park.avi';
+MediaPlayer2.Open;
+MediaPlayer2.Play;
+end;
+
+procedure TfrmVideo.Image3Click(Sender: TObject);
+begin
+MediaPlayer3.FileName:=extractfilePath(paramstr(0))+'video\Cape Breton Highlands.avi';
+MediaPlayer3.Open;
+MediaPlayer3.Play;
+end;
+
+end.

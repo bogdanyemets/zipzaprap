@@ -1,0 +1,202 @@
+unit slide;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ExtCtrls, workblend, jpeg, pngimage;
+
+type
+  TfrmSlider = class(TForm)
+    butleft: TButton;
+    butright: TButton;
+    pict: TImage;
+    Label1: TLabel;
+    ScrollBox1: TScrollBox;
+    Timer1: TTimer;
+    fon1: TImage;
+    bevel1: TImage;
+    Imagel: TImage;
+    Label2: TLabel;
+    Button1: TButton;
+    Timer2: TTimer;
+    Button2: TButton;
+    //procedure runf(im1,im2:string);
+    procedure butrightClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure butleftClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
+    procedure FormResize(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure ImagelMouseLeave(Sender: TObject);
+    procedure ImagelMouseEnter(Sender: TObject);
+    procedure ImagelClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure Timer2Timer(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmSlider: TfrmSlider;
+  prevs:string;
+  m:byte;
+  max:integer;
+  dir:string;
+  strName: array [1..100] of string;
+  strCapt: array [1..100] of string;
+  C,N:integer;
+implementation
+
+uses menu;
+
+{$R *.dfm}
+procedure TfrmSlider.butleftClick(Sender: TObject);
+begin
+ if m>1 then
+ begin
+runf(dir+inttostr(m)+'.jpg',dir+inttostr(m-1)+'.jpg');
+m:=m-1;
+ end;
+end;
+
+procedure TfrmSlider.butrightClick(Sender: TObject);
+begin
+if m<(max) then
+begin
+runf(dir+inttostr(m)+'.jpg',dir+inttostr(m+1)+'.jpg');
+m:=m+1;
+end;
+
+inc(n);
+  if n>c then n:=1;
+  pict.Picture.LoadFromFile(extractFilePath(paramstr(0))+'photos\'+strName[N]+'.jpg');
+  label2.Caption:=strCapt[N];
+end;
+
+procedure TfrmSlider.Button1Click(Sender: TObject);
+begin
+timer2.Enabled:=true;
+butleft.Enabled:=false;
+butright.Enabled:=false;
+end;
+
+
+procedure TfrmSlider.Button2Click(Sender: TObject);
+begin
+timer2.Enabled:=false;
+butleft.Enabled:=true;
+butright.Enabled:=true;
+end;
+
+procedure TfrmSlider.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+begin
+application.Terminate;
+end;
+
+procedure TfrmSlider.FormCreate(Sender: TObject);
+var
+  f:textfile;
+  i:integer;
+begin
+//if paramstr(1)='' then
+dir:='photos/';// else dir:=paramstr(1); }
+AssignFile(f,extractfilepath(paramstr(0))+'photos\_.txt');
+Reset(f);
+i:=0;
+while not eof(f) do
+begin
+inc(i);
+readln(f,strName[i]);
+readln(f,strCapt[i]);
+end;
+C:=i;
+N:=1;
+pict.Picture.LoadFromFile(extractfilepath(paramstr(0))+'photos\'+strName[N]+'.jpg');
+Label2.Caption:=strCapt[N];
+CloseFile(f);
+end;
+
+procedure TfrmSlider.FormResize(Sender: TObject);
+begin
+fon1.Top:=frmSlider.Top-60;
+fon1.Left:=frmSlider.Left;
+fon1.Width:=frmSlider.Width+400;
+fon1.Height:=frmSlider.Height+300;
+end;
+
+procedure TfrmSlider.FormShow(Sender: TObject);
+var
+i:byte;
+begin
+i:=1;
+while FileExists(dir+inttostr(i)+'.jpg') do
+begin
+i:=i+1;
+end;
+max:=i-1;
+label1.Caption:=inttostr(max);
+m:=1;
+pict.Picture.LoadFromFile(dir+inttostr(1)+'.jpg');
+end;
+
+procedure TfrmSlider.ImagelClick(Sender: TObject);
+begin
+frmSlider.Hide;
+frmMenu.show;
+end;
+
+procedure TfrmSlider.ImagelMouseEnter(Sender: TObject);
+begin
+imagel.Picture.LoadFromFile(extractfilepath(paramstr(0))+'stuff\4.png');
+end;
+
+procedure TfrmSlider.ImagelMouseLeave(Sender: TObject);
+begin
+imagel.Picture.LoadFromFile(extractfilepath(paramstr(0))+'stuff\3.png');
+end;
+
+//procedure TfrmSlider.runf(im1,im2:string);
+//begin
+//prevs:=im1;
+//workblend.picturn:=im2;
+//workblend.x0:=frmSlider.Left+pict.Left;
+//workblend.y0:=frmSlider.Top+pict.Top;
+//workblend.w0:=pict.Width;
+//workblend.h0:=pict.Height;
+//application.ProcessMessages;
+//doublebuffered:=true;
+//forma.show;
+//end;
+
+procedure TfrmSlider.Timer1Timer(Sender: TObject);
+begin
+bevel1.Left:=round(frmSlider.Width/2-bevel1.Width/2);
+bevel1.Top:=round(frmSlider.Height/2-bevel1.Height/2)-scrollbox1.Height;
+pict.Left:=round(frmSlider.Width/2-pict.Width/2);
+pict.Top:=round(frmSlider.Height/2-pict.Height/2)-scrollbox1.Height;
+scrollbox1.Left:=round(frmSlider.Width/2-scrollbox1.Width/2);
+scrollbox1.Top:=frmSlider.Height-scrollbox1.Height*2;
+label2.Left:=round(frmSlider.Width/2-label2.Width/2);
+label2.Top:=frmSlider.Height-label2.Height*2 -50;
+end;
+
+procedure TfrmSlider.Timer2Timer(Sender: TObject);
+begin
+if m<(max) then
+begin
+runf(dir+inttostr(m)+'.jpg',dir+inttostr(m+1)+'.jpg');
+m:=m+1;
+end;
+
+inc(n);
+  if n>c then n:=1;
+  pict.Picture.LoadFromFile(extractFilePath(paramstr(0))+'photos\'+strName[N]+'.jpg');
+  label2.Caption:=strCapt[N];
+end;
+
+end.
